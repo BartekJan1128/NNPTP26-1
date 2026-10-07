@@ -43,3 +43,6 @@ INPTPZ1/obj/
 INPTPZ1Tests/bin/
 INPTPZ1Tests/obj/
 packages/
+
+#Output image of the program
+output.png
