@@ -32,6 +32,8 @@ namespace NNPTPZ1.Mathematics
             return derivative;
         }
 
+        public ComplexNumber Eval(double x) => Eval(new ComplexNumber { Real = x });
+
         public ComplexNumber Eval(ComplexNumber x)
         {
             if (x == null) throw new ArgumentNullException(nameof(x));

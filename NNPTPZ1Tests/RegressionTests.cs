@@ -20,7 +20,7 @@ namespace NNPTPZ1Tests
             Assert.AreEqual(new ComplexNumber { Real = 2, Imaginary = 6 }, left.Subtract(right));
             Assert.AreEqual(new ComplexNumber { Real = 11, Imaginary = -2 }, left.Multiply(right));
             Assert.AreEqual(new ComplexNumber { Real = -1, Imaginary = 2 }, left.Divide(right));
-            Assert.AreEqual(5, left.GetAbS(), 1e-10);
+            Assert.AreEqual(5, left.GetAbsoluteValue(), 1e-10);
             Assert.AreEqual(new ComplexNumber { Real = 3, Imaginary = 4 }, left);
             Assert.AreEqual(new ComplexNumber { Real = 1, Imaginary = -2 }, right);
             Assert.ThrowsException<DivideByZeroException>(() => left.Divide(ComplexNumber.Zero));
@@ -45,10 +45,21 @@ namespace NNPTPZ1Tests
             Assert.AreEqual(0, ComplexNumber.Zero.Real);
         }
 
+        [DataTestMethod]
+        [DataRow(1.0, 1.0, 45.0)]
+        [DataRow(-1.0, 1.0, 135.0)]
+        [DataRow(-1.0, -1.0, -135.0)]
+        [DataRow(0.0, -1.0, -90.0)]
+        public void AngleIsInDegreesAndUsesCorrectQuadrant(double real, double imaginary, double expected)
+        {
+            Assert.AreEqual(expected, new ComplexNumber { Real = real, Imaginary = (float)imaginary }.GetAngleInDegrees(), 1e-10);
+        }
+
         [TestMethod]
         public void PolynomialEvaluationAndDerivativeSupportComplexArguments()
         {
             var polynomial = Cubic();
+            Assert.AreEqual(new ComplexNumber { Real = 9 }, polynomial.Eval(2));
             var point = new ComplexNumber { Imaginary = 1 };
             Assert.AreEqual(new ComplexNumber { Real = 1, Imaginary = -1 }, polynomial.Eval(point));
             Assert.AreEqual(new ComplexNumber { Real = -3 }, polynomial.Derive().Eval(point));

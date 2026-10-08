@@ -68,11 +68,11 @@ namespace NNPTPZ1
                 if (!IsFinite(root)) return false;
                 ComplexNumber value = polynomial.Eval(root);
                 if (!IsFinite(value)) return false;
-                if (value.GetAbS() <= ConvergenceTolerance) return true;
+                if (value.GetAbsoluteValue() <= ConvergenceTolerance) return true;
                 if (iterations == MaxIterations) return false;
 
                 ComplexNumber slope = derivative.Eval(root);
-                if (!IsFinite(slope) || slope.GetAbS() == 0) return false;
+                if (!IsFinite(slope) || slope.GetAbsoluteValue() == 0) return false;
                 root = root.Subtract(value.Divide(slope));
             }
 
@@ -87,7 +87,7 @@ namespace NNPTPZ1
         {
             for (int index = 0; index < roots.Count; index++)
             {
-                if (root.Subtract(roots[index]).GetAbS() <= RootTolerance) return index;
+                if (root.Subtract(roots[index]).GetAbsoluteValue() <= RootTolerance) return index;
             }
 
             roots.Add(root);

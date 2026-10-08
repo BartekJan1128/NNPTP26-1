@@ -61,7 +61,9 @@ namespace NNPTPZ1.Mathematics
             };
         }
 
-        public double GetAbS() => Math.Sqrt(Real * Real + (double)Imaginary * Imaginary);
+        public double GetAbsoluteValue() => Math.Sqrt(Real * Real + (double)Imaginary * Imaginary);
+        public double GetAngleInDegrees() => Math.Atan2(Imaginary, Real) * 180 / Math.PI;
+
         public override string ToString() => $"({Real} + {Imaginary}i)";
 
         private static void ValidateOperand(ComplexNumber other)
